@@ -16,8 +16,6 @@ FUENTES = {
     'serif.ttf': 'https://raw.githubusercontent.com/google/fonts/main/ofl/instrumentserif/InstrumentSerif-Regular.ttf',
     'serif-i.ttf': 'https://raw.githubusercontent.com/google/fonts/main/ofl/instrumentserif/InstrumentSerif-Italic.ttf',
     'sans.ttf': 'https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz,wght%5D.ttf',
-    'bosque.jpg': 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1400&q=85',
-    'ciervos.jpg': 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1400&q=85',
 }
 
 K = 2
@@ -96,7 +94,7 @@ def card(name, eyebrow, t1, t2, sub, photo, focus=0.5):
 
     px0, py0, px1, py1 = 700 * K, 40 * K, 1160 * K, 590 * K
     pw, ph = px1 - px0, py1 - py0
-    foto = Image.open(cache(photo)).convert('RGB')
+    foto = Image.open(R / 'assets' / 'img' / f'{photo}-1600.jpg').convert('RGB')
     r = max(pw / foto.width, ph / foto.height)
     foto = foto.resize((round(foto.width * r), round(foto.height * r)), Image.LANCZOS)
     left = (foto.width - pw) // 2
@@ -146,23 +144,23 @@ def card(name, eyebrow, t1, t2, sub, photo, focus=0.5):
 def build():
     OUT.mkdir(parents=True, exist_ok=True)
     card('portada', 'Aprender · Comprender · Sentir · Avanzar', 'Ama tus', 'palabras.',
-         'Eventos, formaciones y contenidos para parar, comprender, recordar y sentir.', 'bosque.jpg', .45)
+         'Eventos, formaciones y contenidos para parar, comprender, recordar y sentir.', 'cascada2', .45)
     card('eventos', 'Eventos', 'Encuentros', 'en persona.',
-         'Próximas fechas de paseos, charlas y encuentros para compartir en grupo.', 'ciervos.jpg', .55)
+         'Próximas fechas de paseos, charlas y encuentros para compartir en grupo.', 'paseo2', .55)
     card('formaciones', 'Formaciones', 'Aprender', 'con calma.',
-         'Experiencias de aprendizaje con programa completo, en grupo y en la naturaleza.', 'bosque.jpg', .45)
+         'Experiencias de aprendizaje con programa completo, en grupo y en la naturaleza.', 'cascada2', .45)
     card('alimentacion', 'Alimentación', 'Lo que comemos', 'también habla.',
-         'La alimentación y el equilibrio del cuerpo, la mente y el alma.', 'ciervos.jpg', .55)
+         'La alimentación y el equilibrio del cuerpo, la mente y el alma.', 'huerto', .55)
     card('salud', 'Salud', 'Cuidar', 'lo que sentimos.',
-         'Reflexiones para acompañar el duelo, las emociones y las creencias.', 'bosque.jpg', .45)
+         'Reflexiones para acompañar el duelo, las emociones y las creencias.', 'cascada2', .45)
     card('testimonios', 'Testimonios', 'Lo que', 'nos cuentan.',
-         'Experiencias de quienes han compartido con nosotros un encuentro o una formación.', 'ciervos.jpg', .55)
+         'Experiencias de quienes han compartido con nosotros un encuentro o una formación.', 'casa', .55)
     card('tienda', 'Tienda', 'Libros', 'para seguir.',
-         'Libros y recursos del equipo para seguir profundizando en casa.', 'bosque.jpg', .45)
+         'Libros y recursos del equipo para seguir profundizando en casa.', 'cascada2', .45)
     card('contacto', 'Contacto', 'Hablemos', 'con calma.',
-         'Escríbenos para reservar, resolver dudas o recibir información.', 'ciervos.jpg', .55)
+         'Escríbenos para reservar, resolver dudas o recibir información.', 'paseo', .55)
     card('crea-te-a-ti-mismo', '6 y 7 dic 2026 · Bárcena Mayor · 400 € + IVA', 'Créate', 'a ti mismo.',
-         'Dos días de aprendizaje y naturaleza en favor de tu bienestar físico-emocional.', 'ciervos.jpg', .55)
+         'Dos días de aprendizaje y naturaleza en favor de tu bienestar físico-emocional.', 'casa', .55)
 
     for s in (180, 192, 512):
         ic = mark(s, color='#1f6a62', bg='#fafaf8', pad=0.16).convert('RGB')

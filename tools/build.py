@@ -13,7 +13,15 @@ BASE = 'https://ama-tus-palabras.github.io/'
 EMAIL = 'federico@fe-derico.com'
 WHATSAPP = '34606448325'   # solo dígitos con prefijo
 YOUTUBE = 'https://www.youtube.com/@AmaTusPalabras'
-REDES = {}             # {'Instagram': 'https://...', 'Facebook': 'https://...'}
+REDES = {'Instagram': 'https://www.instagram.com/fe_dericojose/',
+         'Facebook': 'https://www.facebook.com/federicojosegonzalezsanmartin/'}
+LIBROS = [  # Amazon: tapa blanda y Kindle
+    ('Ama <em>tus palabras</em>', 'Primer libro de la dilogía que da nombre a este proyecto.',
+     'https://www.amazon.es/dp/8409713845', 'https://www.amazon.es/dp/B0F3KQV2CN'),
+    ('Créate <em>a ti mismo</em>', 'Segundo libro de la dilogía, que inspira la formación del mismo nombre.',
+     'https://www.amazon.es/dp/8409713837', 'https://www.amazon.es/dp/B0F3KN68T5'),
+]
+AUTOR = 'Federico José González San Martín'
 LEMA = 'Aprender · Comprender · Sentir · Avanzar · Recordar'
 EQUIPO = 'Abel, Cristina, Marisol y Federico José'
 
@@ -34,8 +42,6 @@ AVISO = ('<strong>Aviso.</strong> Ama tus palabras no es un equipo de personal m
          'Lo que leas o pongas en práctica es bajo tu propia responsabilidad: contrasta la información, investiga por tu cuenta y consulta '
          'con un profesional sanitario antes de cambiar tu alimentación, medicación o tratamiento.')
 
-FOREST = '1448375240586-882707db888b'
-DEER = '1472396961693-142e6e269027'
 
 
 def mailto(asunto, cuerpo=''):
@@ -44,11 +50,11 @@ def mailto(asunto, cuerpo=''):
     return f'mailto:{EMAIL}?{q}'
 
 
-def img(id_, alt, sizes, eager=False, widths=(800, 1600, 2400, 3840)):
-    u = lambda w: f'https://images.unsplash.com/photo-{id_}?auto=format&amp;fit=crop&amp;w={w}&amp;q=80'
-    srcset = ',\n          '.join(f'{u(w)} {w}w' for w in widths)
-    load = 'fetchpriority="high"' if eager else 'loading="lazy"'
-    return f'<img src="{u(1600)}"\n          srcset="{srcset}"\n          sizes="{sizes}" alt="{alt}" {load}>'
+def foto(nombre, alt, sizes, eager=False, widths=(800, 1600, 2400, 3840)):
+    """Fotos propias en assets/img/<nombre>-<ancho>.jpg (sacadas de los vídeos de la casa)."""
+    srcset = ',\n          '.join(f'{{pre}}assets/img/{nombre}-{w}.jpg {w}w' for w in widths)
+    load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
+    return f'<img src="{{pre}}assets/img/{nombre}-1600.jpg"\n          srcset="{srcset}"\n          sizes="{sizes}" alt="{alt}" {load}>'
 
 
 def page(path, title, desc, section, body):
@@ -144,10 +150,20 @@ def hero(eyebrow, h1, lead, actions=''):
     </section>'''
 
 
-def hero_img(id_, alt):
+def hero_img(nombre, alt):
     return f'''    <div class="wrap pull reveal">
       <figure class="hero-media" style="margin:0">
-        {img(id_, alt, "(min-width: 1400px) 76rem, 100vw", eager=True)}
+        {foto(nombre, alt, "(min-width: 1400px) 76rem, 100vw", eager=True)}
+      </figure>
+    </div>'''
+
+
+def hero_video(nombre, alt):
+    return f'''    <div class="wrap pull reveal">
+      <figure class="hero-media" style="margin:0">
+        <video autoplay muted loop playsinline preload="metadata" poster="{{pre}}assets/img/{nombre}-1600.jpg" aria-label="{alt}">
+          <source src="{{pre}}assets/img/{nombre}.mp4" type="video/mp4">
+        </video>
       </figure>
     </div>'''
 
@@ -181,7 +197,7 @@ def euros(n):
 
 CREATE_CARD = f'''        <a class="card reveal" href="{{pre}}formaciones/crea-te-a-ti-mismo/" style="padding:0;overflow:hidden">
           <div class="hero-media" style="aspect-ratio:16/10;border-radius:0">
-            {img(DEER, "Ciervos en un prado junto al bosque", "(min-width: 760px) 38rem, 100vw", widths=(800, 1600, 2400))}
+            {foto("casa", "La casa del encuentro, con jardín y bosque alrededor", "(min-width: 760px) 38rem, 100vw", widths=(800, 1600, 2400))}
           </div>
           <div style="padding:clamp(1.5rem,3vw,2.25rem)">
             <div class="tags"><span class="tag live">Inscripción abierta</span><span class="tag">6–7 dic 2026</span><span class="tag">Bárcena Mayor</span><span class="tag">{euros(PRECIO)}{IVA}</span></div>
@@ -229,7 +245,7 @@ def build():
         <a class="button ghost" href="#apartados">Explorar</a>
       </div>""")}
 
-{hero_img(FOREST, "Bosque frondoso con luz entre los árboles")}
+{hero_img("cascada2", "Cascada entre helechos y bosque")}
 
     <section class="section wrap" id="apartados">
 {head("Apartados", "Todo lo que <em>compartimos.</em>", "Cuatro espacios para encontrar lo que buscas. Todo con fin divulgativo y de autoconocimiento.")}
@@ -346,23 +362,22 @@ def build():
 
 {CONTACT}''')
 
+    libros = '\n'.join(f'''        <div class="card reveal">
+          <span class="num">Libro · {AUTOR}</span>
+          <h3 class="h3">{t}</h3>
+          <p>{d}</p>
+          <div class="actions" style="margin-top:auto">
+            <a class="button" href="{tapa}" target="_blank" rel="noopener">Tapa blanda en Amazon <span class="arrow">→</span></a>
+            <a class="button ghost" href="{kindle}" target="_blank" rel="noopener">Kindle</a>
+          </div>
+        </div>''' for t, d, tapa, kindle in LIBROS)
+
     page('tienda', 'Tienda', 'Libros y recursos de Ama tus palabras.', 'tienda', f'''{hero("Tienda", "Libros <em>para seguir.</em>",
-        "La dilogía «Ama tus palabras» y «Créate a ti mismo», para seguir profundizando en casa. Escríbenos y te contamos cómo conseguirlos.")}
+        f"La dilogía «Ama tus palabras» y «Créate a ti mismo», de {AUTOR}, para seguir profundizando en casa. Disponibles en Amazon en tapa blanda y Kindle.")}
 
     <section class="section wrap">
       <div class="grid grid-2">
-        <div class="card reveal">
-          <span class="num">Libro</span>
-          <h3 class="h3">Ama <em>tus palabras</em></h3>
-          <p>Primer libro de la dilogía que da nombre a este proyecto.</p>
-          <a class="link" style="margin-top:auto" href="{mailto('Libro: Ama tus palabras')}">Pedir información <span class="arrow">→</span></a>
-        </div>
-        <div class="card reveal">
-          <span class="num">Libro</span>
-          <h3 class="h3">Créate <em>a ti mismo</em></h3>
-          <p>Segundo libro de la dilogía, que inspira la formación del mismo nombre.</p>
-          <a class="link" style="margin-top:auto" href="{mailto('Libro: Créate a ti mismo')}">Pedir información <span class="arrow">→</span></a>
-        </div>
+{libros}
       </div>
     </section>
 
@@ -399,17 +414,28 @@ def build():
     # ---------- Créate a ti mismo
     reserva = round(PRECIO * RESERVA_PCT / 100)
     incluye = [
-        ('Alojamiento', 'Incluido durante los dos días del encuentro.'),
-        ('Desayunos, comidas y cena', 'Todas las comidas del encuentro están incluidas.'),
-        ('Los 3 módulos', 'Alimentación molecular, duelo e integración y reprogramación mental.'),
-        ('Paseos por la naturaleza', 'Paseos por el entorno de Bárcena Mayor para aprender fuera del aula.'),
-        ('Taller de cocina molecular', 'Un taller práctico para llevar lo aprendido a la cocina.'),
+        ('Alojamiento', 'Incluido durante los dos días del encuentro, en una casa rodeada de bosque.', 'dormitorio', 'Dormitorio de la casa'),
+        ('Desayunos, comidas y cena', 'Todas las comidas del encuentro están incluidas.', 'cocina', 'Cocinando una tortilla en la cocina de la casa'),
+        ('Los 3 módulos', 'Alimentación molecular, duelo e integración y reprogramación mental.', 'biblioteca', 'Rincón de lectura de la casa'),
+        ('Paseos por la naturaleza', 'Paseos por el entorno de Bárcena Mayor para aprender fuera del aula.', 'paseo2', 'Camino entre árboles junto a una pared de roca'),
+        ('Taller de cocina molecular', 'Un taller práctico para llevar lo aprendido a la cocina.', 'huerto', 'Tomateras del huerto'),
     ]
-    incluye_cards = '\n'.join(f'''        <div class="card reveal">
-          <span class="num">{i:02d}</span>
-          <h3 class="h3">{t}</h3>
-          <p>{d}</p>
-        </div>''' for i, (t, d) in enumerate(incluye, 1))
+    incluye_cards = '\n'.join(f'''        <div class="card reveal" style="padding:0;overflow:hidden">
+          <div class="hero-media" style="aspect-ratio:3/2;border-radius:0">
+            {foto(f, alt, "(min-width: 960px) 25rem, 100vw", widths=(800, 1600))}
+          </div>
+          <div class="card-body">
+            <span class="num">{i:02d}</span>
+            <h3 class="h3">{t}</h3>
+            <p>{d}</p>
+          </div>
+        </div>''' for i, (t, d, f, alt) in enumerate(incluye, 1))
+    galeria = '\n'.join(f'''        <figure class="hero-media reveal">
+          {foto(f, alt, "(min-width: 960px) 38rem, 100vw", widths=(800, 1600, 2400))}
+        </figure>''' for f, alt in [
+        ('casa', 'La casa, con tejado de teja y jardín'), ('salon', 'Salón con butacas y luz natural'),
+        ('porche', 'Porche acristalado entre árboles'), ('jardin', 'Jardín con mesas y sillas'),
+        ('dormitorio', 'Dormitorio con cama de matrimonio'), ('cascada', 'Cascada cerca de la casa')])
     fila_noche = f'        <div><small>Noche adicional</small><strong>{NOCHE_EXTRA}{IVA}</strong></div>\n' if NOCHE_EXTRA else ''
     pedir = mailto('Reserva: Créate a ti mismo',
                    'Hola, me gustaría reservar plaza en Créate a ti mismo (6 y 7 de diciembre de 2026).')
@@ -426,7 +452,7 @@ def build():
         <a class="button ghost" href="#incluye">Qué incluye</a>
       </div>""")}
 
-{hero_img(FOREST, "Bosque frondoso con luz entre los árboles")}
+{hero_video("cascada", "Cascada entre rocas con musgo, cerca de la casa")}
 
     <section class="section wrap" id="experiencia">
       <div class="section-head">
@@ -498,7 +524,7 @@ def build():
     <section class="section wrap band">
       <div class="split">
         <figure class="hero-media reveal" style="margin:0">
-          {img(DEER, "Ciervos en un prado junto al bosque", "(min-width: 860px) 40rem, 100vw", widths=(800, 1600, 2400))}
+          {foto("paseo", "Paseo por un camino entre árboles", "(min-width: 860px) 40rem, 100vw", widths=(800, 1600, 2400))}
         </figure>
         <div>
           <p class="eyebrow reveal">También fuera del aula</p>
@@ -513,6 +539,13 @@ def build():
 {head("Qué incluye", "Todo listo para <em>que solo te ocupes de ti.</em>", "El precio incluye el alojamiento, las comidas, los módulos, los paseos y el taller.")}
       <div class="grid grid-3">
 {incluye_cards}
+      </div>
+    </section>
+
+    <section class="section wrap" id="casa">
+{head("El alojamiento", "Una casa <em>en mitad del bosque.</em>", "Dormirás, comerás y aprenderás en esta casa rodeada de naturaleza, con jardín, huerto y cascadas a pocos pasos.")}
+      <div class="gallery">
+{galeria}
       </div>
     </section>
 

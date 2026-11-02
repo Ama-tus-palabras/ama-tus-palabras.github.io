@@ -22,3 +22,8 @@ if ('IntersectionObserver' in window) {
 } else {
   items.forEach(el => el.classList.add('in'));
 }
+
+// Vídeos de fondo: quietos si el dispositivo pide menos movimiento
+if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('video[autoplay]').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+}
