@@ -11,8 +11,8 @@ BASE = 'https://ama-tus-palabras.github.io/'
 
 # ---------- Datos de contacto y enlaces (vacío = aún no lo tenemos y no se muestra como enlace)
 EMAIL = 'federico@fe-derico.com'
-WHATSAPP = ''          # solo dígitos con prefijo, p. ej. '34600111222'
-YOUTUBE = ''
+WHATSAPP = '34606448325'   # solo dígitos con prefijo
+YOUTUBE = 'https://www.youtube.com/@AmaTusPalabras'
 REDES = {}             # {'Instagram': 'https://...', 'Facebook': 'https://...'}
 LEMA = 'Aprender · Comprender · Sentir · Avanzar · Recordar'
 EQUIPO = 'Abel, Cristina, Marisol y Federico José'
@@ -346,11 +346,22 @@ def build():
 {CONTACT}''')
 
     page('tienda', 'Tienda', 'Libros y recursos de Ama tus palabras.', 'tienda', f'''{hero("Tienda", "Libros <em>para seguir.</em>",
-        "Libros y recursos del equipo para seguir profundizando en casa.")}
+        "La dilogía «Ama tus palabras» y «Créate a ti mismo», para seguir profundizando en casa. Escríbenos y te contamos cómo conseguirlos.")}
 
     <section class="section wrap">
       <div class="grid grid-2">
-{soon("Nuestros <em>libros</em>", "Muy pronto podrás conseguir aquí nuestros libros. Si te interesa alguno, escríbenos.", "#contacto", "Preguntar por un libro")}
+        <div class="card reveal">
+          <span class="num">Libro</span>
+          <h3 class="h3">Ama <em>tus palabras</em></h3>
+          <p>Primer libro de la dilogía que da nombre a este proyecto.</p>
+          <a class="link" style="margin-top:auto" href="{mailto('Libro: Ama tus palabras')}">Pedir información <span class="arrow">→</span></a>
+        </div>
+        <div class="card reveal">
+          <span class="num">Libro</span>
+          <h3 class="h3">Créate <em>a ti mismo</em></h3>
+          <p>Segundo libro de la dilogía, que inspira la formación del mismo nombre.</p>
+          <a class="link" style="margin-top:auto" href="{mailto('Libro: Créate a ti mismo')}">Pedir información <span class="arrow">→</span></a>
+        </div>
       </div>
     </section>
 
@@ -371,8 +382,8 @@ def build():
         </div>'''
 
     canales = [canal('Correo', EMAIL, mailto('Información sobre Ama tus palabras')),
-               canal('WhatsApp', 'Escríbenos' if WHATSAPP else 'Teléfono de contacto', f'https://wa.me/{WHATSAPP}' if WHATSAPP else ''),
-               canal('YouTube', 'Nuestro canal', YOUTUBE)]
+               canal('WhatsApp', ' '.join([WHATSAPP[2:5], WHATSAPP[5:8], WHATSAPP[8:]]) if WHATSAPP else 'Teléfono de contacto', f'https://wa.me/{WHATSAPP}' if WHATSAPP else ''),
+               canal('YouTube', '@AmaTusPalabras', YOUTUBE)]
     canales += [canal('Redes sociales', n, u) for n, u in REDES.items()] or [canal('Redes sociales', 'Síguenos', '')]
 
     page('contacto', 'Contacto', 'Contacto de Ama tus palabras: correo, WhatsApp, YouTube y redes sociales.', 'contacto', f'''{hero("Contacto", "Hablemos <em>con calma.</em>",
@@ -398,7 +409,7 @@ def build():
           <h3 class="h3">{t}</h3>
           <p>{d}</p>
         </div>''' for i, (t, d) in enumerate(incluye, 1))
-    noche = NOCHE_EXTRA or 'Consúltanos'
+    fila_noche = f'        <div><small>Noche adicional</small><strong>{NOCHE_EXTRA}</strong></div>\n' if NOCHE_EXTRA else ''
     pedir = mailto('Reserva: Créate a ti mismo',
                    'Hola, me gustaría reservar plaza en Créate a ti mismo (6 y 7 de diciembre de 2026).')
     wa = (f'\n        <a class="button ghost" href="https://wa.me/{WHATSAPP}" target="_blank" rel="noopener">WhatsApp</a>'
@@ -406,7 +417,7 @@ def build():
 
     page('formaciones/crea-te-a-ti-mismo', 'Créate a ti mismo',
          f'Créate a ti mismo: dos días de aprendizaje y naturaleza el 6 y 7 de diciembre de 2026 en Bárcena Mayor, Cantabria. {euros(PRECIO)} con alojamiento y comidas.',
-         'formaciones', f'''{hero("6 y 7 de diciembre de 2026 · Bárcena Mayor, Cantabria", "Créate<br><em>a ti mismo.</em>",
+         'formaciones', f'''{hero("Reto de 2 días · 6 y 7 de diciembre de 2026 · Bárcena Mayor, Cantabria", "Créate<br><em>a ti mismo.</em>",
         "Dos días de aprendizaje y naturaleza en favor de tu bienestar físico-emocional.",
         """
       <div class="actions reveal">
@@ -436,14 +447,14 @@ def build():
           <p class="eyebrow reveal">El programa</p>
           <h2 class="h2 reveal">Estructurado en <em>3 módulos.</em></h2>
         </div>
-        <p class="reveal">Tres áreas de trabajo, con contenidos y herramientas para llevarte a casa.</p>
+        <p class="reveal">Te enseñamos cómo aplicar lo que nos funciona: son años de experiencia. Tres áreas de trabajo, con herramientas para llevarte a casa.</p>
       </div>
       <div class="grid grid-3">
         <article class="card reveal">
           <span class="num">Módulo 01</span>
           <h3 class="h3">Alimentación molecular</h3>
           <p class="promise">Restaura el desequilibrio bioquímico y metabólico.</p>
-          <p>Exploraremos cómo identificar los alimentos según su principal efecto en el organismo y por qué importa la combinación de alimentos. Revisaremos cómo la alimentación se relaciona con el equilibrio del cuerpo, la mente y el alma.</p>
+          <p>Sin dietas, sin efectos secundarios y sin dejar de comer. Aprenderás a identificar los alimentos según su principal efecto en nuestro cuerpo, porque lo importante es la combinación de los alimentos, que activan procesos hormonales y metabólicos que construyen o destruyen el estado de salud de las personas. Revisaremos cómo la alimentación se relaciona con el equilibrio del cuerpo, la mente y el alma.</p>
           <ul><li>Reconocer funciones de los alimentos.</li><li>Comprender la importancia de la variedad y la combinación.</li><li>Aprender sin planteamientos de dietas restrictivas.</li><li>Taller de cocina molecular.</li></ul>
           <p class="note">Contenido educativo; no sustituye el consejo médico o nutricional individual.</p>
         </article>
@@ -451,15 +462,15 @@ def build():
           <span class="num">Módulo 02</span>
           <h3 class="h3">Duelo, superación e integración</h3>
           <p class="promise">Los seis pasos clave del duelo.</p>
-          <p>El duelo puede aparecer tras la pérdida de un familiar, una pareja, una mascota, un trabajo o un cambio relacionado con la salud o la economía. Este módulo propone un recorrido de reflexión para reconocer, acompañar y transformar el significado que percibimos por la pérdida con lo que nos hemos identificado.</p>
+          <p>Incluye el duelo por un familiar, por tu pareja, por una mascota, por un trabajo o negocio, por tu salud e incluso por el dinero. Este módulo propone un recorrido de reflexión para reconocer, acompañar y transformar el significado que percibimos por la pérdida con lo que nos hemos identificado.</p>
           <a class="link" href="#seis-pasos" style="margin-top:auto">Explorar los seis pasos <span class="arrow">→</span></a>
         </article>
         <article class="card reveal">
           <span class="num">Módulo 03</span>
           <h3 class="h3">Reprogramación mental</h3>
           <p class="promise">Traspasa los límites de tu mente con la Hipnoconsciencia.</p>
-          <p>Conocerás una técnica de Hipnoconsciencia desarrollada por el equipo. La propuesta es explorar el origen o la raíz de conflictos que pueden estar relacionados con el dinero, las relaciones de pareja o familiares y el bienestar físico y emocional.</p>
-          <ul><li>No necesitas experiencia previa.</li><li>La sesión se plantea de forma consciente y voluntaria.</li><li>Se exploran creencias y patrones personales.</li></ul>
+          <p>Haremos una sesión de Hipnoconsciencia, una técnica desarrollada por nuestro equipo, para encontrar el origen y la raíz de ese conflicto, que puede estar en el dinero, en tus relaciones de pareja o familiares o en tu salud físico-emocional. Desde la raíz transformamos esa creencia o programa que te puede estar impidiendo vivir la vida que deseas.</p>
+          <ul><li>No necesitas tener experiencia previa.</li><li>Toda la experiencia la realizarás totalmente consciente: recordarás los hechos del inconsciente y del consciente a la vez.</li><li>Te dejaremos una herramienta para que puedas entrar en tu subconsciente siempre que lo desees.</li></ul>
           <p class="note">La experiencia es formativa y de autoconocimiento; no garantiza resultados ni sustituye atención psicológica o sanitaria.</p>
         </article>
       </div>
@@ -474,12 +485,12 @@ def build():
         <p class="reveal">Un itinerario de reflexión presentado en el material del encuentro.</p>
       </div>
       <div class="steps">
-        <article class="reveal"><span>01</span><div><h3 class="h3">Lo siento</h3><p>Paro y me permito sentir el dolor.</p></div></article>
-        <article class="reveal"><span>02</span><div><h3 class="h3">Me arrepiento</h3><p>Reconozco aquello de lo que no fui consciente y ahora puedo comprender.</p></div></article>
-        <article class="reveal"><span>03</span><div><h3 class="h3">Perdón</h3><p>Reconozco que puedo equivocarme y me responsabilizo de los efectos de mis actos.</p></div></article>
-        <article class="reveal"><span>04</span><div><h3 class="h3">Gracias</h3><p>Agradezco lo que he aprendido durante el proceso del dolor.</p></div></article>
-        <article class="reveal"><span>05</span><div><h3 class="h3">Amor</h3><p>Es el pegamento que ayuda a reunir las piezas del puzle para que se unifiquen e integren en el alma.</p></div></article>
-        <article class="reveal"><span>06</span><div><h3 class="h3">Coser</h3><p>Cerrar la herida, comprender el proceso y dar un lugar a lo vivido.</p></div></article>
+        <article class="reveal"><span>01</span><div><h3 class="h3">Lo siento</h3><p>Realizo la acción de parar y sentir el dolor.</p></div></article>
+        <article class="reveal"><span>02</span><div><h3 class="h3">Me arrepiento</h3><p>Porque fui inconsciente de lo que estaba creando; ahora entiendo.</p></div></article>
+        <article class="reveal"><span>03</span><div><h3 class="h3">Perdón</h3><p>Reconozco que nos podemos equivocar y me responsabilizo de los efectos que creé.</p></div></article>
+        <article class="reveal"><span>04</span><div><h3 class="h3">Gracias</h3><p>Por todo lo que he aprendido durante el proceso del dolor.</p></div></article>
+        <article class="reveal"><span>05</span><div><h3 class="h3">Amor</h3><p>El pegamento para que todas las piezas del puzle se unifiquen y se integren en el alma.</p></div></article>
+        <article class="reveal"><span>06</span><div><h3 class="h3">Coser</h3><p>El cierre de la herida. Aunque duela, es el momento más dulce: cierras lo que se rompió porque comprendes el proceso que te sanó.</p></div></article>
       </div>
     </section>
 
@@ -511,15 +522,14 @@ def build():
       <div class="facts reveal" style="margin-top:3rem">
         <div><small>Precio total</small><strong>{euros(PRECIO)}</strong></div>
         <div><small>Reserva</small><strong>{RESERVA_PCT} % al reservar ({euros(reserva)})</strong></div>
-        <div><small>Noche adicional</small><strong>{noche}</strong></div>
-        <div><small>Fecha</small><strong>6 y 7 de diciembre de 2026</strong></div>
+{fila_noche}        <div><small>Fecha</small><strong>6 y 7 de diciembre de 2026</strong></div>
         <div><small>Lugar</small><strong>Bárcena Mayor, Cantabria</strong></div>
-        <div><small>Equipo</small><strong>{EQUIPO}</strong></div>
+        <div><small>Promotores de la salud</small><strong>{EQUIPO}</strong></div>
       </div>
       <div class="actions reveal">
         <a class="button" href="{pedir}">Reservar por correo <span class="arrow">→</span></a>{wa}
       </div>
-      <p class="muted small reveal" style="margin-top:1.25rem">Escríbenos a <a href="{mailto('Información sobre Créate a ti mismo')}">{EMAIL}</a> y te explicamos cómo hacer la reserva.</p>
+      <p class="muted small reveal" style="margin-top:1.25rem">Escríbenos a <a href="{mailto('Información sobre Créate a ti mismo')}">{EMAIL}</a> y te explicamos cómo hacer la reserva.{'' if NOCHE_EXTRA else ' Si necesitas una noche adicional, consúltanos.'}</p>
     </section>''')
 
 
