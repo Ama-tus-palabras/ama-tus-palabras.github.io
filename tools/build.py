@@ -442,9 +442,9 @@ def build():
           if WHATSAPP else '')
 
     page('formaciones/crea-te-a-ti-mismo', 'Créate a ti mismo',
-         f'Créate a ti mismo: dos días de aprendizaje y naturaleza el 6 y 7 de diciembre de 2026 en Bárcena Mayor, Cantabria. {euros(PRECIO)}, con alojamiento y comidas.',
+         f'Créate a ti mismo: dos días de aprendizaje y naturaleza el 6 y 7 de diciembre de 2026 en Bárcena Mayor, Cantabria. {euros(PRECIO)}, con alojamiento y comidas. Plazas limitadas.',
          'formaciones', f'''{hero("Reto de 2 días · 6 y 7 de diciembre de 2026 · Bárcena Mayor, Cantabria", "Créate<br><em>a ti mismo.</em>",
-        "Dos días de aprendizaje y naturaleza en favor de tu bienestar físico-emocional.",
+        "Dos días de aprendizaje y naturaleza en favor de tu bienestar físico-emocional. Plazas limitadas.",
         """
       <div class="actions reveal">
         <a class="button" href="#reserva">Reservar plaza <span class="arrow">→</span></a>
@@ -550,9 +550,10 @@ def build():
 
     <section class="section wrap" id="reserva">
       <span id="encuentro"></span>
-      <p class="eyebrow reveal">Reserva tu plaza</p>
+      <p class="eyebrow reveal">Reserva tu plaza · Plazas limitadas</p>
       <h2 class="h2 reveal" style="max-width:48rem">Dos días para <em>aprender, sentir y compartir.</em></h2>
       <div class="facts reveal" style="margin-top:3rem">
+        <div><small>Plazas</small><strong>Limitadas</strong></div>
         <div><small>Precio total</small><strong>{euros(PRECIO)}</strong></div>
         <div><small>Reserva</small><strong>{RESERVA_PCT} % al reservar ({euros(reserva)})</strong></div>
 {fila_noche}        <div><small>Fecha</small><strong>6 y 7 de diciembre de 2026</strong></div>
@@ -562,7 +563,7 @@ def build():
       <div class="actions reveal">
         <a class="button" href="{pedir}">Reservar por correo <span class="arrow">→</span></a>{wa}
       </div>
-      <p class="muted small reveal" style="margin-top:1.25rem">Escríbenos a <a href="{mailto('Información sobre Créate a ti mismo')}">{EMAIL}</a> y te explicamos cómo hacer la reserva.{'' if NOCHE_EXTRA else ' Si necesitas una noche adicional, consúltanos.'}</p>
+      <p class="muted small reveal" style="margin-top:1.25rem">Escríbenos a <a href="{mailto('Información sobre Créate a ti mismo')}">{EMAIL}</a> y te explicamos cómo hacer la reserva. Las plazas son limitadas.{'' if NOCHE_EXTRA else ' Si necesitas una noche adicional, consúltanos.'}</p>
     </section>''')
 
 
