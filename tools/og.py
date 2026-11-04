@@ -159,7 +159,7 @@ def build():
          'Libros y recursos del equipo para seguir profundizando en casa.', 'cascada2', .45)
     card('contacto', 'Contacto', 'Hablemos', 'con calma.',
          'Escríbenos para reservar, resolver dudas o recibir información.', 'paseo', .55)
-    card('crea-te-a-ti-mismo', '6 y 7 dic 2026 · Bárcena Mayor · 400 € + IVA', 'Créate', 'a ti mismo.',
+    card('crea-te-a-ti-mismo', '6 y 7 dic 2026 · Bárcena Mayor · 400 €', 'Créate', 'a ti mismo.',
          'Dos días de aprendizaje y naturaleza en favor de tu bienestar físico-emocional.', 'casa', .55)
 
     for s in (180, 192, 512):

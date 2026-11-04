@@ -29,7 +29,6 @@ EQUIPO = 'Abel, Cristina, Marisol y Federico José'
 PRECIO = 400
 RESERVA_PCT = 30
 NOCHE_EXTRA = '200 €'
-IVA = ' + IVA'        # los precios se publican sin IVA
 
 MARK = '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10.5 19.5c0-3.6 1.6-6.4 4.4-8l.7 1c-1.7 1.2-2.6 2.6-2.8 4.3.4-.2.8-.3 1.3-.3 1.4 0 2.4 1 2.4 2.4 0 1.5-1.1 2.6-2.6 2.6-2 0-3.4-1.4-3.4-2zM17.6 19.5c0-3.6 1.6-6.4 4.4-8l.7 1c-1.7 1.2-2.6 2.6-2.8 4.3.4-.2.8-.3 1.3-.3 1.4 0 2.4 1 2.4 2.4 0 1.5-1.1 2.6-2.6 2.6-2 0-3.4-1.4-3.4-2z" fill="currentColor"/></svg>'
 
@@ -200,7 +199,7 @@ CREATE_CARD = f'''        <a class="card reveal" href="{{pre}}formaciones/crea-t
             {foto("casa", "La casa del encuentro, con jardín y bosque alrededor", "(min-width: 760px) 38rem, 100vw", widths=(800, 1600, 2400))}
           </div>
           <div style="padding:clamp(1.5rem,3vw,2.25rem)">
-            <div class="tags"><span class="tag live">Inscripción abierta</span><span class="tag">6–7 dic 2026</span><span class="tag">Bárcena Mayor</span><span class="tag">{euros(PRECIO)}{IVA}</span></div>
+            <div class="tags"><span class="tag live">Inscripción abierta</span><span class="tag">6–7 dic 2026</span><span class="tag">Bárcena Mayor</span><span class="tag">{euros(PRECIO)}</span></div>
             <h3 class="h3">Créate <em>a ti mismo</em></h3>
             <p>Dos días de aprendizaje y naturaleza en favor de tu bienestar físico-emocional: alimentación molecular, duelo y reprogramación mental, con alojamiento y comidas incluidos.</p>
             <span class="link">Ver la formación <span class="arrow">→</span></span>
@@ -436,14 +435,14 @@ def build():
         ('casa', 'La casa, con tejado de teja y jardín'), ('salon', 'Salón con butacas y luz natural'),
         ('porche', 'Porche acristalado entre árboles'), ('jardin', 'Jardín con mesas y sillas'),
         ('dormitorio', 'Dormitorio con cama de matrimonio'), ('cascada', 'Cascada cerca de la casa')])
-    fila_noche = f'        <div><small>Noche adicional</small><strong>{NOCHE_EXTRA}{IVA}</strong></div>\n' if NOCHE_EXTRA else ''
+    fila_noche = f'        <div><small>Noche adicional</small><strong>{NOCHE_EXTRA}</strong></div>\n' if NOCHE_EXTRA else ''
     pedir = mailto('Reserva: Créate a ti mismo',
                    'Hola, me gustaría reservar plaza en Créate a ti mismo (6 y 7 de diciembre de 2026).')
     wa = (f'\n        <a class="button ghost" href="https://wa.me/{WHATSAPP}" target="_blank" rel="noopener">WhatsApp</a>'
           if WHATSAPP else '')
 
     page('formaciones/crea-te-a-ti-mismo', 'Créate a ti mismo',
-         f'Créate a ti mismo: dos días de aprendizaje y naturaleza el 6 y 7 de diciembre de 2026 en Bárcena Mayor, Cantabria. {euros(PRECIO)}{IVA}, con alojamiento y comidas.',
+         f'Créate a ti mismo: dos días de aprendizaje y naturaleza el 6 y 7 de diciembre de 2026 en Bárcena Mayor, Cantabria. {euros(PRECIO)}, con alojamiento y comidas.',
          'formaciones', f'''{hero("Reto de 2 días · 6 y 7 de diciembre de 2026 · Bárcena Mayor, Cantabria", "Créate<br><em>a ti mismo.</em>",
         "Dos días de aprendizaje y naturaleza en favor de tu bienestar físico-emocional.",
         """
@@ -554,8 +553,8 @@ def build():
       <p class="eyebrow reveal">Reserva tu plaza</p>
       <h2 class="h2 reveal" style="max-width:48rem">Dos días para <em>aprender, sentir y compartir.</em></h2>
       <div class="facts reveal" style="margin-top:3rem">
-        <div><small>Precio total</small><strong>{euros(PRECIO)}{IVA}</strong></div>
-        <div><small>Reserva</small><strong>{RESERVA_PCT} % al reservar ({euros(reserva)}{IVA})</strong></div>
+        <div><small>Precio total</small><strong>{euros(PRECIO)}</strong></div>
+        <div><small>Reserva</small><strong>{RESERVA_PCT} % al reservar ({euros(reserva)})</strong></div>
 {fila_noche}        <div><small>Fecha</small><strong>6 y 7 de diciembre de 2026</strong></div>
         <div><small>Lugar</small><strong>Bárcena Mayor, Cantabria</strong></div>
         <div><small>Promotores de la salud</small><strong>{EQUIPO}</strong></div>

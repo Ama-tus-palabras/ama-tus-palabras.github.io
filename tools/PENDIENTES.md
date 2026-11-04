@@ -26,7 +26,7 @@ o que se quitó o adaptó. Al tenerlo, se añade en `tools/build.py` y se regene
 - Redes: Instagram `fe_dericojose` y Facebook `federicojosegonzalezsanmartin` (las que enlaza el canal de YouTube).
 - Libros en Amazon (autor Federico José González San Martín): Ama tus palabras (8409713845, Kindle B0F3KQV2CN)
   y Créate a ti mismo (8409713837, Kindle B0F3KN68T5).
-- Precios sin IVA: 400 € + IVA, reserva 30 % (120 € + IVA), noche adicional 200 € + IVA.
+- Precios (04-11: sin mención al IVA, se publica solo el precio): 400 €, reserva 30 % (120 €), noche adicional 200 €.
 - «Cursos» es de momento lo mismo que «Formaciones» (cabecera «Cursos y formaciones»).
 - WhatsApp 606 448 325, YouTube @AmaTusPalabras, correo federico@fe-derico.com.
 - Texto de alimentación («el escrito»), texto propio de «Coser», seis pasos y textos del módulo 3.
