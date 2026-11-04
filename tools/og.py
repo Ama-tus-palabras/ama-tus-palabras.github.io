@@ -20,7 +20,7 @@ FUENTES = {
 
 K = 2
 W, H = 1200 * K, 630 * K
-INK, MUTED, FAINT, ACCENT = '#ffffff', (255, 255, 255, 214), (255, 255, 255, 150), '#a7ecd3'
+INK, MUTED, FAINT, ACCENT = '#ffffff', (255, 255, 255, 214), (255, 255, 255, 150), '#a9dcf7'
 
 
 def cache(nombre):
@@ -55,8 +55,8 @@ def mark(size, color=ACCENT, bg='none', pad=0.0, rx=0):
 
 
 def fondo():
-    """Degradado azul verdoso como las bandas de la web."""
-    a, b, c = (12, 50, 71), (17, 80, 95), (25, 96, 79)
+    """Degradado azul como las bandas de la web."""
+    a, b, c = (10, 44, 94), (15, 70, 127), (20, 98, 121)
     g = Image.new('RGB', (W, H))
     px = g.load()
     for y in range(0, H, 2):
@@ -163,7 +163,7 @@ def build():
          'Dos días de aprendizaje y naturaleza en favor de tu bienestar físico-emocional. Plazas limitadas.', 'casa', .55)
 
     for s in (180, 192, 512):
-        ic = mark(s, color='#1f6a62', bg='#fafaf8', pad=0.16).convert('RGB')
+        ic = mark(s, color='#1d5b8f', bg='#fafaf8', pad=0.16).convert('RGB')
         ic.save(R / 'assets' / ('apple-touch-icon.png' if s == 180 else f'icon-{s}.png'), optimize=True)
 
 

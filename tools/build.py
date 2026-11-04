@@ -43,6 +43,10 @@ AVISO = ('<strong>Aviso.</strong> Ama tus palabras no es un equipo de personal m
 
 
 
+# Versión de CSS y JS en los enlaces: cambia con su contenido y fuerza a los navegadores a recargarlos
+import hashlib as _h
+VER = _h.sha1(b''.join((R / 'assets' / f).read_bytes() for f in ('site.css', 'site.js'))).hexdigest()[:8]
+
 def mailto(asunto, cuerpo=''):
     from urllib.parse import quote
     q = f'subject={quote(asunto)}' + (f'&amp;body={quote(cuerpo)}' if cuerpo else '')
@@ -100,7 +104,7 @@ def page(path, title, desc, section, body):
   <link rel="manifest" href="{pre}manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="{pre}assets/site.css">
+  <link rel="stylesheet" href="{pre}assets/site.css?v={VER}">
 </head>
 <body>
   <header class="site-header">
@@ -132,7 +136,7 @@ def page(path, title, desc, section, body):
       </div>
     </div>
   </footer>
-  <script src="{pre}assets/site.js"></script>
+  <script src="{pre}assets/site.js?v={VER}"></script>
 </body>
 </html>
 '''
